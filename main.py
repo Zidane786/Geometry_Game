@@ -129,3 +129,4 @@ my_turtle = turtle.Turtle()  # it will create Turtle(i.e:-Arrow)
 rect1.draw(canvas=my_turtle)
 user_point.draw(canvas=my_turtle)
 turtle.done()  # to show canvas screen when work canvas done
+print("Project done")
