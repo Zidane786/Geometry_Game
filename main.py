@@ -1,3 +1,6 @@
+from random import randint as ri
+
+
 class Rectangle:
     def __init__(self, point1, point2):
         """
@@ -14,7 +17,7 @@ class Rectangle:
         print(f"Rectangle Co-ordinate:- {self.point1.x},{self.point1.y}",
               f"and {self.point2.x},{self.point2.y}")
 
-    def area(self):
+    def area_of_rect(self):
         """
         :return:Area of Rectangle
         """
@@ -57,4 +60,24 @@ class Point:
 
         x_axis = self.x - x
         y_axis = self.y - y
-        return ((x_axis * x_axis) + (y_axis * y_axis)) ** (0.5)  # num**0.5 give squareroot of the num
+        return ((x_axis * x_axis) + (y_axis * y_axis)) ** 0.5  # num**0.5 give square root of the num
+
+
+# we want point1<point2 or point2<point1 visa versa so we will run randint() as shown below so there is no
+p1 = Point(ri(0, 9), ri(0, 9))
+p2 = Point(ri(10, 19), ri(10, 19))
+
+# creating Rectangle Object
+rect1 = Rectangle(p1, p2)
+rect1.display_coord()
+
+# user input for Point Object so we can check if it fall inside rectengle or not
+user_point = Point(float(input("Guess X:-")), float(input("Guess Y:-")))
+
+print(f"Your Point was Inside Rectange:-{user_point.fall_in_rect(rect1)}")
+
+print(f"Length of Rectangle is {rect1.area_of_rect()}")
+
+# return distance between 2 point
+print(f"Distance between Point of co-ord {int(6)},{int(3)} and \
+{user_point.x},{user_point.y}is :-{user_point.distance_from_points(3, 6):.2f}")
