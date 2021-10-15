@@ -64,7 +64,7 @@ class Point:
         return ((x_axis * x_axis) + (y_axis * y_axis)) ** 0.5  # num**0.5 give square root of the num
 
 
-class GuiRectangle(Rectangle):
+class GuiRectangle(Rectangle, Point):
 
     def draw(self, canvas):
         """
@@ -87,7 +87,17 @@ class GuiRectangle(Rectangle):
         canvas.forward(width)  # move forward by width pixel
         canvas.left(90)  # turn arrow head to left by angle 90 degree
 
-        turtle.done()  # to keep screen
+
+class GuiPoint(Point):
+
+    def draw(self, canvas, size=5, color="red"):
+        """
+        This will display the point
+        """
+        canvas.penup()  # to stop drawing
+        canvas.goto(self.x, self.y)  # go to this location this is where point is located
+        canvas.pendown()  # to start drawing
+        canvas.dot(size, color)
 
 
 """we want point1<point2 or point2<point1 visa versa so we will run 
@@ -101,18 +111,21 @@ rect1 = GuiRectangle(p1, p2)  # replace Rectangle with GuiRectangle since it chi
 rect1.display_coord()
 
 # user input for Point Object so we can check if it fall inside rectangle or not
-user_point = Point(float(input("Guess X:-")), float(input("Guess Y:-")))
+user_point = GuiPoint(float(input("Guess X:-")), float(input("Guess Y:-")))
+
+# guess area
+user_area = float(input("Guess the Area of Rectangle:-"))
 
 print(f"Your Point was Inside Rectangle:-{user_point.fall_in_rect(rect1)}")
+print(f"Length of Rectangle was:- {rect1.area_of_rect()}")
 
-print(f"Length of Rectangle is {rect1.area_of_rect()}")
-
-# return distance between 2 point
-print(f"Distance between Point of co-ord {int(6)},{int(3)} and \
-{user_point.x},{user_point.y}is :-{user_point.distance_from_points(3, 6):.2f}")
-
+# # return distance between 2 point
+# print(f"Distance between Point of co-ord {int(6)},{int(3)} and \
+# {user_point.x},{user_point.y}is :-{user_point.distance_from_points(3, 6):.2f}")
 
 # Creating Turtle instance
 my_turtle = turtle.Turtle()  # it will create Turtle(i.e:-Arrow)
 
 rect1.draw(canvas=my_turtle)
+user_point.draw(canvas=my_turtle)
+turtle.done()  # to show canvas screen when work canvas done
