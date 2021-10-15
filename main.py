@@ -1,4 +1,5 @@
 from random import randint as ri
+import turtle
 
 
 class Rectangle:
@@ -63,21 +64,55 @@ class Point:
         return ((x_axis * x_axis) + (y_axis * y_axis)) ** 0.5  # num**0.5 give square root of the num
 
 
-# we want point1<point2 or point2<point1 visa versa so we will run randint() as shown below so there is no
-p1 = Point(ri(0, 9), ri(0, 9))
-p2 = Point(ri(10, 19), ri(10, 19))
+class GuiRectangle(Rectangle):
+
+    def draw(self, canvas):
+        """
+        This will display the rectangle
+        """
+
+        canvas.penup()  # stop drawing line because pen is up
+        canvas.goto(self.point1.x, self.point1.y)
+
+        canvas.pendown()  # so it can start drawing
+        # for length point1.x - point2.x
+        length = self.point2.x - self.point1.x
+        width = self.point2.y - self.point1.y
+        canvas.forward(length)  # move forward by length pixel
+        canvas.left(90)  # turn arrow head to left by angle 90 degree
+        canvas.forward(width)  # move forward by width pixel
+        canvas.left(90)  # turn arrow head to left by angle 90 degree
+        canvas.forward(length)  # move forward by length pixel
+        canvas.left(90)  # turn arrow head to left by angle 90 degree
+        canvas.forward(width)  # move forward by width pixel
+        canvas.left(90)  # turn arrow head to left by angle 90 degree
+
+        turtle.done()  # to keep screen
+
+
+"""we want point1<point2 or point2<point1 visa versa so we will run 
+randint() as shown below so there is no bug in program
+"""
+p1 = Point(ri(0, 400), ri(0, 400))
+p2 = Point(ri(10, 400), ri(10, 400))
 
 # creating Rectangle Object
-rect1 = Rectangle(p1, p2)
+rect1 = GuiRectangle(p1, p2)  # replace Rectangle with GuiRectangle since it child class
 rect1.display_coord()
 
-# user input for Point Object so we can check if it fall inside rectengle or not
+# user input for Point Object so we can check if it fall inside rectangle or not
 user_point = Point(float(input("Guess X:-")), float(input("Guess Y:-")))
 
-print(f"Your Point was Inside Rectange:-{user_point.fall_in_rect(rect1)}")
+print(f"Your Point was Inside Rectangle:-{user_point.fall_in_rect(rect1)}")
 
 print(f"Length of Rectangle is {rect1.area_of_rect()}")
 
 # return distance between 2 point
 print(f"Distance between Point of co-ord {int(6)},{int(3)} and \
 {user_point.x},{user_point.y}is :-{user_point.distance_from_points(3, 6):.2f}")
+
+
+# Creating Turtle instance
+my_turtle = turtle.Turtle()  # it will create Turtle(i.e:-Arrow)
+
+rect1.draw(canvas=my_turtle)
