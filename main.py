@@ -14,6 +14,14 @@ class Rectangle:
         print(f"Rectangle Co-ordinate:- {self.point1.x},{self.point1.y}",
               f"and {self.point2.x},{self.point2.y}")
 
+    def area(self):
+        """
+        :return:Area of Rectangle
+        """
+        length = self.point2.x - self.point1.x
+        width = self.point2.y - self.point1.y
+        return width * length
+
 
 class Point:
     def __init__(self, x, y):
@@ -25,16 +33,28 @@ class Point:
         self.x = x
         self.y = y
 
-    def fall_in_rect(self, point1, point2):
+    def fall_in_rect(self, rect_obj):
         """
         check if point lies inside rectangle or not!
 
 
-        :param point1: lower left or upper right point of rectangle
-        :param point2: lower left or upper right point of rectangle
+        :param rect_obj: object of Rectangle class is passed
         :return:True if point falls inside rectangle else return False
         """
-        if point1.x < self.x < point2.x and point1.y < self.y < point2.y:
+        if rect_obj.point1.x < self.x < rect_obj.point2.x and \
+                rect_obj.point1.y < self.y < rect_obj.point2.y:
             return True
         else:
             return False
+
+    def distance_from_points(self, x, y):
+
+        """
+        :param x: co-ordinate of point
+        :param y: co-ordinate of point
+        :return: Distance between 2 Point
+        """
+
+        x_axis = self.x - x
+        y_axis = self.y - y
+        return ((x_axis * x_axis) + (y_axis * y_axis)) ** (0.5)  # num**0.5 give squareroot of the num
